@@ -4,14 +4,18 @@ return {
   version = false,
   opts = {
     provider = "ollama",
-    ollama = {
-      endpoint = "http://170.64.152.207:11445/",
-      model = "mistral:7b-instruct-v0.2-q8_0",
-      timeout = 30000,
-      temperature = 0,
-      max_completion_tokens = 8192,
-      api_key = os.getenv("OPENAI_API_KEY"),
-      --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+    providers = {
+      ollama = {
+        endpoint = "http://170.64.152.207:11445/",
+        model = "mistral:7b-instruct-v0.2-q8_0",
+        timeout = 30000,
+        api_key = os.getenv("OLLAMA_API_KEY"),
+        extra_request_body = {
+          temperature = 0,
+          max_completion_tokens = 8192,
+          --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+        },
+      },
     },
     -- Enable RAG service
     repo_map = {
