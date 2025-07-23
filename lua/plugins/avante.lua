@@ -6,11 +6,31 @@ return {
     provider = "ollama",
     ollama = {
       endpoint = "http://170.64.152.207:11445/",
-      model = "gpt-",
+      model = "mistral:7b-instruct-v0.2-q8_0",
       timeout = 30000,
       temperature = 0,
       max_completion_tokens = 8192,
+      api_key = os.getenv("OPENAI_API_KEY"),
       --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+    },
+    -- Enable RAG service
+    repo_map = {
+      enabled = true,
+      exclude_patterns = { "node_modules", ".git", "target", "build", "dist" },
+      max_files = 1000,
+      max_file_size = 100000,
+    },
+    file_selector = {
+      enabled = true,
+      max_files = 10,
+    },
+    -- RAG-specific settings
+    behaviour = {
+      auto_suggestions = false,
+      auto_set_highlight_group = true,
+      auto_set_keymaps = true,
+      auto_apply_diff_after_generation = false,
+      support_paste_from_clipboard = false,
     },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

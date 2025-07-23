@@ -9,7 +9,7 @@ return {
     require("mcphub").setup {
       -- Required options
       port = 3000, 
-      config = vim.fn.expand "~/mcpservers.json", 
+      config = vim.fn.expand "~/.cursor/mcp.json", 
 
       -- Optional options
       on_ready = function(hub)
