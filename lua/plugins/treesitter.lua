@@ -11,6 +11,8 @@ return {
       "typescript",
       "javascript",
       "python",
+      "markdown",
+      "markdown_inline",
       -- add more arguments for adding more treesitter parsers
     })
   end,

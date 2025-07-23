@@ -5,7 +5,7 @@ return {
       args = { "--quiet", "-" },
     },
     isort = {
-      command = "isort",
+      command = "/Users/bolong.wang/.local/bin/isort",
       args = { "--stdout", "--profile", "black", "-" },
     },
   },
