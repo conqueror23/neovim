@@ -14,17 +14,6 @@ if not pcall(require, "lazy") then
   vim.fn.getchar()
   vim.cmd.quit()
 end
---
--- local has = vim.fn.has
--- if has('python') then
---   vim.g.python3_host_prog = '/usr/bin/python3'
---   vim.api.nvim_create_user_command('Ollama', '!ollama generate', {})
--- end
---
--- vim.g.python3_host_prog = '/usr/bin/python3'
 
 require "lazy_setup"
 require "polish"
--- vim.g.loaded_python3_provider = 1
-vim.g.python3_host_prog = '/opt/homebrew/bin/python3'
-vim.env.PATH = vim.env.PATH .. ':/opt/homebrew/bin'
