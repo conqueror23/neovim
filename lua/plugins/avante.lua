@@ -4,25 +4,50 @@ return {
   version = false,
   opts = {
     provider = "ollama",
-    ollama = {
-      endpoint = "http://170.64.152.207:11445/",
-      model = "mistral:7b-instruct-v0.2-q8_0",
-      timeout = 30000,
-      temperature = 0,
-      max_completion_tokens = 8192,
-      api_key = os.getenv("OPENAI_API_KEY"),
-      --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+    providers = {
+      ollama = {
+        endpoint = "http://170.64.152.207:11445/",
+        model = "mistral:7b-instruct-v0.2-q8_0",
+        timeout = 30000,
+        api_key_name = "OLLAMA_API_KEY",
+        extra_request_body = {
+          temperature = 0,
+          max_completion_tokens = 8192,
+          --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+        },
+      },
     },
-    -- Enable RAG service
+    -- Enhanced RAG service configuration
     repo_map = {
       enabled = true,
-      exclude_patterns = { "node_modules", ".git", "target", "build", "dist" },
-      max_files = 1000,
-      max_file_size = 100000,
+      exclude_patterns = {
+        "node_modules",
+        ".git",
+        "target",
+        "build",
+        "dist",
+        "*.log",
+        "*.tmp",
+        "*.cache",
+        "__pycache__",
+        ".venv",
+        "*.min.js",
+        "*.min.css",
+        "package-lock.json",
+        "yarn.lock",
+      },
+      max_files = 1500,
+      max_file_size = 150000,
+      ignore_gitignore = true,
     },
     file_selector = {
       enabled = true,
-      max_files = 10,
+      max_files = 15,
+      provider = "telescope", -- or "fzf"
+    },
+    -- RAG hints and context
+    hints = {
+      enabled = true,
     },
     -- RAG-specific settings
     behaviour = {
