@@ -35,6 +35,7 @@ All custom plugin configurations are in `lua/plugins/` with each file containing
 - **AI Assistants**: `avante.lua` (Ollama-based), `codecompanion.lua` (MCP integration)
 - **Development Tools**: `mason.lua` (package management), `telescope.lua` (fuzzy finder), `neotest.lua` (testing framework)
 - **Language Support**: `treesitter.lua`, `nvim-cmp.lua` (completion), `null-ls.lua` (formatters/linters)
+- **User Experience**: `notify.lua` (notification settings), `rest.lua` (REST client)
 - **User Customizations**: `user.lua` (Discord presence, custom ASCII art, autopairs, completion sources)
 
 ### Configuration Patterns
@@ -48,6 +49,7 @@ All custom plugin configurations are in `lua/plugins/` with each file containing
 - **Language Support**: Pre-configured for Lua, Rust, TypeScript/JavaScript with automatic tooling installation
 - **Custom UI**: Personalized startup screen with ASCII art, Catppuccin theme, custom icons
 - **Development Workflow**: Integrated testing (neotest), debugging (nvim-dap), and formatting/linting (null-ls)
+- **Optimized UX**: Reduced notification timeout (1.5s) and fixed search bar blinking issues
 
 ### Lazy.nvim Plugin Loading
 Plugins are loaded in this order:
@@ -173,6 +175,9 @@ Automatically installs parsers for: lua, vim, python, markdown, javascript, type
 - Python host program is set to use Homebrew Python (`/opt/homebrew/bin/python3`)
 - Many specialized plugins for data science and AI development workflows
 - Configuration optimized for terminal usage with kitty terminal emulator
+- **UX Improvements**: 
+  - Notification timeout reduced to 1.5 seconds (`lua/plugins/notify.lua`)
+  - Search bar blinking fixed via `guicursor` setting (`lua/plugins/astrocore.lua`)
 - Keymap conflicts have been resolved with plugin-specific prefixes:
   - `<leader>m*` for Molten commands
   - `<leader>i*` for Iron REPL commands
