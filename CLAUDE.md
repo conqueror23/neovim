@@ -114,12 +114,20 @@ F12   # Step out
 <leader>cV   # Claude Code with verbose flag
 ```
 
+### Vue.js Development Commands
+```bash
+<leader>lv   # Vue source actions (organize imports, remove unused, etc.)
+<leader>lf   # Auto-fix Vue errors and warnings
+<leader>li   # Auto-import Vue components
+<leader>la   # Show all available code actions (standard LSP)
+```
+
 ## Language Support
 
 ### Configured Languages
 - **Python**: Full LSP support with Pyright, debugging with nvim-dap
 - **JavaScript/TypeScript**: ESLint integration, Vue.js support
-- **Vue.js**: Dedicated language pack and LSP configuration
+- **Vue.js**: Modern Volar LSP with error diagnostics, auto-fixing, code actions, and formatting
 - **Lua**: Built-in support for Neovim configuration
 - **Markdown**: Enhanced with Quarto support for data science notebooks
 - **CSV**: Specialized support via rainbow-csv plugin

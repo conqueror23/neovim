@@ -1,4 +1,7 @@
-return {
+-- Import Vue.js LSP configuration
+local vue_config = require("user.lsp.vue_ls")
+
+return vim.tbl_deep_extend("force", {
   pyright = {
     settings = {
       python = {
@@ -46,5 +49,5 @@ return {
       },
     },
   },
-}
+}, vue_config)
 

@@ -7,7 +7,7 @@ return {
     providers = {
       ollama = {
         endpoint = "http://170.64.152.207:11445/",
-        model = "mistral:7b-instruct-v0.2-q8_0",
+        model = "kirito1/qwen3-coder:30b-a3b",
         timeout = 30000,
         api_key_name = "OLLAMA_API_KEY",
         extra_request_body = {

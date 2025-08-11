@@ -14,7 +14,7 @@ return {
     formatting = {
       format_on_save = {
         enabled = true,
-        allow_filetypes = { "ts" },
+        allow_filetypes = { "ts", "vue", "javascript", "typescript" },
         ignore_filetypes = {},
       },
       disabled = {},
@@ -59,6 +59,44 @@ return {
         end,
         filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
         cmd = { "typescript-language-server", "--stdio" }
+      },
+      volar = {
+        on_attach = function(client, bufnr)
+          local opts = { silent = true, buffer = bufnr }
+          
+          -- Vue.js specific keymaps
+          vim.keymap.set("n", "<leader>lv", function()
+            vim.lsp.buf.code_action({
+              filter = function(action)
+                return action.kind and string.match(action.kind, "source%..*")
+              end,
+              apply = true,
+            })
+          end, vim.tbl_extend("force", opts, { desc = "Vue source actions" }))
+          
+          vim.keymap.set("n", "<leader>lf", function()
+            vim.lsp.buf.code_action({
+              filter = function(action)
+                return action.title and string.match(action.title, "Fix")
+              end,
+              apply = true,
+            })
+          end, vim.tbl_extend("force", opts, { desc = "Auto-fix Vue errors" }))
+          
+          vim.keymap.set("n", "<leader>li", function()
+            vim.lsp.buf.code_action({
+              filter = function(action)
+                return action.title and string.match(action.title, "Add.*import")
+              end,
+              apply = true,
+            })
+          end, vim.tbl_extend("force", opts, { desc = "Auto-import Vue component" }))
+        end,
+        init_options = {
+          typescript = {
+            tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib"
+          }
+        }
       },
     },
     -- customize how language servers are attached
