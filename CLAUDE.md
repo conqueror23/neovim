@@ -4,58 +4,56 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is an AstroNvim v4+ configuration repository that extends the base AstroNvim framework with specialized plugins and configurations for data science, Python development, and AI-assisted coding.
+This is an AstroNvim v4+ configuration repository - a feature-rich Neovim distribution built on top of the Lazy.nvim plugin manager. The configuration is structured as a template that can be customized for personal use.
 
-## Architecture
+## Key Commands
 
-### Core Structure
-- **Base Framework**: AstroNvim v4 with Lazy.nvim plugin manager
-- **Entry Point**: `init.lua` bootstraps Lazy.nvim and calls `lazy_setup.lua` and `polish.lua`
-- **Plugin Organization**: 
-  - `lua/lazy_setup.lua`: Main Lazy configuration importing AstroNvim, community plugins, and local plugins
-  - `lua/community.lua`: AstroCommunity module imports (language packs, recipes, colorschemes)
-  - `lua/plugins/`: Individual plugin configurations (50+ specialized plugins)
-  - `lua/user/`: User-specific configurations including LSP, mappings, and initialization
+### Package Management
+- `nvim` - Start Neovim and automatically install plugins via Lazy.nvim
+- `:Lazy` - Open Lazy.nvim plugin manager interface
+- `:Lazy update` - Update all plugins
+- `:Lazy sync` - Synchronize plugins (install missing, update existing)
 
-### Key Configuration Files
-- `lua/user/init.lua`: Main user configuration with colorscheme, options, mappings, and plugin settings
-- `lua/user/lsp/servers.lua`: LSP server configurations (primarily Pyright for Python)
-- `lua/user/mappings.lua`: Custom key mappings for Python execution and debugging
-- `lua/plugins/astrolsp.lua`: LSP feature configuration with formatting settings
-- `lua/plugins/treesitter.lua`: Syntax highlighting for multiple languages
+### LSP and Development Tools
+- `:LspInstall <server>` - Install language server via Mason
+- `:MasonInstall <tool>` - Install formatter/linter/debugger via Mason
+- `:Mason` - Open Mason package manager interface
+- No explicit build/test commands - this is a Neovim configuration, not a development project
 
-## Development Environment
+## Architecture and Structure
 
-### Python Configuration
-- **Python Path**: Uses Homebrew Python (`/opt/homebrew/bin/python3`)
-- **Virtual Environment**: Pyright automatically detects and uses `VIRTUAL_ENV`
-- **LSP**: Pyright configured for Python development with virtual environment support
-- **Databricks Connect**: Configured for local execution against Databricks clusters
+### Core Configuration Files
+- `init.lua` - Bootstrap file that loads Lazy.nvim and calls other modules
+- `lua/lazy_setup.lua` - Main Lazy.nvim configuration and plugin specifications
+- `lua/community.lua` - AstroCommunity pack imports (Lua, Rust, TypeScript, Catppuccin theme)
+- `lua/polish.lua` - Custom filetypes and final configuration tweaks
 
-### Jupyter/Notebook Support
-- **Jupytext**: Seamless .ipynb file editing as Python files with # %% cells
-- **Molten**: Primary Jupyter notebook interface with image support via kitty terminal
-- **Auto-conversion**: .ipynb files automatically converted to/from Python percent format
-- **Cell Execution**: Support for # %% style cells compatible with Databricks notebooks
-- **Image Backend**: Configured for kitty terminal with image.nvim integration
+### Plugin Configuration Structure
+All custom plugin configurations are in `lua/plugins/` with each file containing a LazySpec table:
 
-### File Format Support
-- **.py files**: Standard Python files with # %% cell markers for notebook-style development
-- **.ipynb files**: Jupyter notebooks auto-converted to Python format for editing
-- **Databricks notebooks**: Full support for percent-style cell markers
-- **Mixed workflows**: Seamless switching between .py and .ipynb formats
+- **Core AstroNvim plugins**: `astrocore.lua`, `astrolsp.lua`, `astroui.lua` - Core functionality, LSP setup, and UI configuration
+- **AI Assistants**: `avante.lua` (Ollama-based), `codecompanion.lua` (MCP integration)
+- **Development Tools**: `mason.lua` (package management), `telescope.lua` (fuzzy finder), `neotest.lua` (testing framework)
+- **Language Support**: `treesitter.lua`, `nvim-cmp.lua` (completion), `null-ls.lua` (formatters/linters)
+- **User Customizations**: `user.lua` (Discord presence, custom ASCII art, autopairs, completion sources)
 
-### AI Coding Assistants
-- **Avante**: AI coding assistant with multiple provider support (Ollama, Bedrock, Gemini)
-- **Claude Code**: Integrated Claude Code terminal interface with git root detection
-- **Configuration**: Endpoints and models configured for external AI services
+### Configuration Patterns
+- Each plugin file exports a LazySpec table with plugin name and opts
+- Settings are configured through the `opts` table which gets passed to the plugin's setup function
+- Keymaps are defined in the `mappings` section of relevant plugins (especially astrocore.lua)
+- LSP servers are managed through astrolsp.lua and mason.lua
 
-## Essential Commands
+### Key Features
+- **Multi-AI Integration**: Both Avante.nvim (custom Ollama endpoint) and CodeCompanion.nvim (MCP protocol)
+- **Language Support**: Pre-configured for Lua, Rust, TypeScript/JavaScript with automatic tooling installation
+- **Custom UI**: Personalized startup screen with ASCII art, Catppuccin theme, custom icons
+- **Development Workflow**: Integrated testing (neotest), debugging (nvim-dap), and formatting/linting (null-ls)
 
-### Plugin Management
-```bash
-# Start Neovim (will install plugins on first run)
-nvim
+### Lazy.nvim Plugin Loading
+Plugins are loaded in this order:
+1. AstroNvim core (`astronvim.plugins`)
+2. Community packs (`community.lua`)
+3. User plugins (`plugins/` directory)
 
 # Update plugins
 :Lazy update
