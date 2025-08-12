@@ -14,7 +14,7 @@ return {
     formatting = {
       format_on_save = {
         enabled = true,
-        allow_filetypes = { "ts", "vue", "javascript", "typescript" },
+        allow_filetypes = { "ts", "vue", "javascript", "typescript", "yaml", "yml" },
         ignore_filetypes = {},
       },
       disabled = {},

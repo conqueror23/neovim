@@ -13,6 +13,7 @@ return {
       "python",
       "markdown",
       "markdown_inline",
+      "yaml",
       -- add more arguments for adding more treesitter parsers
     })
   end,

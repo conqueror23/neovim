@@ -82,4 +82,9 @@ return {
     tag = "0.1.8",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
+  {
+    "b0o/schemastore.nvim",
+    lazy = true,
+    version = false,
+  },
 }

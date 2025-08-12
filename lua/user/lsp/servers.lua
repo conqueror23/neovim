@@ -23,6 +23,23 @@ return vim.tbl_deep_extend("force", {
       end
     end,
   },
+  yamlls = {
+    settings = {
+      yaml = {
+        schemaStore = {
+          enable = false,
+          url = "",
+        },
+        schemas = require('schemastore').yaml.schemas(),
+        validate = true,
+        format = {
+          enable = true,
+        },
+        hover = true,
+        completion = true,
+      },
+    },
+  },
   ts_ls = {
     settings = {
       typescript = {
