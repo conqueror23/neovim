@@ -127,6 +127,17 @@ return {
             return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens
           end,
         },
+        ["<Leader>le"] = {
+          function()
+            local filetype = vim.bo.filetype
+            if filetype == "vue" or filetype == "javascript" or filetype == "typescript" then
+              vim.cmd("EslintFixAll")
+            else
+              vim.lsp.buf.format()
+            end
+          end,
+          desc = "ESLint fix all (Vue/JS/TS) or LSP format",
+        },
       },
     },
   },
